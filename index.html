@@ -4,18 +4,36 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Modul 1 – Setup & Mindset RM1K Pertama</title>
-  <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @media print {
+      body::before {
+        content: "© Affiliate LaunchPad 2025 – Dilarang Edar Tanpa Kebenaran";
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-30deg);
+        font-size: 2rem;
+        color: rgba(0, 0, 0, 0.1);
+        z-index: 9999;
+        pointer-events: none;
+      }
+      #downloadBtn, #printBtn {
+        display: none;
+      }
+    }
+  </style>
 </head>
-<body class="bg-gray-50 text-gray-900">
+<body class="bg-gray-50 text-gray-900 font-sans max-w-4xl mx-auto p-6">
 
-  <main class="max-w-3xl mx-auto px-6 py-10 bg-white shadow-md rounded-md">
+  <main id="modul" class="max-w-3xl mx-auto p-6">
 
-    <h1 class="text-3xl font-bold mb-6">Modul 1 – Setup & Mindset RM1K Pertama</h1>
-
-    <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 p-4 mb-6">
-      <strong>"Kalau kau gagal setup & mindset dari awal, semua teknik pun jadi sia-sia."</strong>
-    </div>
+    <h1 class="text-3xl font-bold text-blue-900 border-b-4 border-yellow-500 pb-2 mb-6">
+      📘 MODUL 1 – SETUP & MINDSET RM1K PERTAMA
+    </h1>
+    <blockquote class="italic border-l-4 border-yellow-500 bg-yellow-100 text-yellow-800 px-4 py-3 mb-8">
+      “Kalau kau gagal setup & mindset dari awal, semua teknik pun jadi sia-sia.”
+    </blockquote>
 
     <h2 class="text-xl font-semibold mb-3">✅ 1.1 – Kenapa Ramai Orang Gagal Buat Income dengan Affiliate?</h2>
     <ul class="list-disc list-inside mb-5 space-y-1">
@@ -128,7 +146,33 @@
       <p class="mt-3"><strong>Next Modul:</strong> Kita masuk pemilihan produk power, supaya kau tak buang masa promote barang sendu.</p>
     </div>
 
+    <!-- Navigation buttons -->
+    <div class="flex justify-between mt-8">
+      <a href="index.html" class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400">← Laman Utama</a>
+      <a href="modul2.html" class="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700">Modul 2 →</a>
+    </div>
+
+    <!-- 🖨️ Butang Print / Download -->
+    <div class="flex justify-end gap-4 mt-8 print:hidden">
+      <button id="printBtn" onclick="window.print()" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded">🖨️ Cetak</button>
+      <button id="downloadBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">⬇️ Muat Turun PDF</button>
+    </div>
   </main>
 
+  <!-- jsPDF + html2pdf untuk export PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script>
+    document.getElementById("downloadBtn").addEventListener("click", function () {
+      const element = document.getElementById("modul");
+      const opt = {
+        margin:       0.5,
+        filename:     'Modul-1-RM1K-Pertama.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+      };
+      html2pdf().set(opt).from(element).save();
+    });
+  </script>
 </body>
 </html>
